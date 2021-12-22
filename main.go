@@ -5,6 +5,7 @@ import (
 	"os"
 
 	cpu6502 "izzudinhafiz.com/go-6502/cpu"
+	debugger "izzudinhafiz.com/go-6502/debugger"
 )
 
 func main(){
@@ -23,20 +24,19 @@ func main(){
 
 	fmt.Println(len(readBuffer))
 	cpu := cpu6502.New()
+	deb := debugger.New(cpu)
 
 	cpu.WriteMemory(0, readBuffer)
 	fmt.Println(cpu.Memory[0x400 - 10: 0x400+10])
 	cpu.SetResetVector(0x400)
 	cpu.Reset()
-	cpu.Print()
-	cpu.SingleOperation()
-	cpu.Print()
-	cpu.SingleOperation()
-	cpu.Print()
-	cpu.SingleOperation()
-	cpu.Print()
-	cpu.SingleOperation()
-	cpu.Print()
-	cpu.SingleOperation()
-	cpu.Print()
+
+	repeat := 1000
+	for i := 0; i < repeat; i++ {
+		deb.Trace()
+	}
+
+	for i := 0; i < repeat; i++ {
+		fmt.Println(deb.TraceStack[i])
+	}
 }
