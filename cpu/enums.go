@@ -1,7 +1,7 @@
 package cpu6502
 
 const (
-	UNDEFINED_MODE int = iota
+	UNDEFINED_MODE byte = iota
 	ADR_ACCUMULATOR
 	ADR_IMPLICIT
 	ADR_IMMEDIATE
@@ -18,7 +18,7 @@ const (
 )
 
 const (
-	UNDEFINED_OP int = iota
+	UNDEFINED_OP byte = iota
 	OP_ADC
 	OP_AND
 	OP_ASL
